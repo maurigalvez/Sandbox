@@ -39,8 +39,8 @@ namespace Gameplay.FSM
         {
             base.LogicUpdate();
             if (m_Grounded)
-            { 
-                /// Change state to landing 
+            {
+                m_StateMachine.ChangeState(m_Character.Landing);
             }              
         }
 

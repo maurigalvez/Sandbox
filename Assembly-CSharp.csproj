@@ -72,6 +72,7 @@
     <Compile Include="Assets\Scripts\Player\Player_Character.cs" />
     <Compile Include="Assets\Scripts\FSM\Player\Player_LandingState.cs" />
     <Compile Include="Assets\Scripts\FSM\Player\Player_StandingState.cs" />
+    <Compile Include="Assets\Scripts\FSM\Player\Player_SprintingState.cs" />
     <Compile Include="Assets\Scripts\FSM\Core\State.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
   </ItemGroup>

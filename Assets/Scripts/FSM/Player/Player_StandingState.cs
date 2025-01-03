@@ -53,7 +53,8 @@ namespace Gameplay.FSM
         {
             base.LogicUpdate();
             m_Character.Animator.SetFloat(SPEED_ANIM_NAME, m_Input.magnitude, m_Character.GetSpeedDampTime(), Time.deltaTime);
-            // Set sprinting
+            if (m_Sprinting)
+                m_StateMachine.ChangeState(m_Character.Sprinting);
             if (m_Jump)
                 m_StateMachine.ChangeState(m_Character.Jumping);
             if (m_Crouch)

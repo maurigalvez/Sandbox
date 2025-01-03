@@ -1,6 +1,8 @@
+using System;
 using UnityEngine;
 namespace Gameplay.FSM
 {
+    [Serializable]
     public class StateMachine
     {
         public State CurrentState { get; private set; }

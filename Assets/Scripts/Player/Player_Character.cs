@@ -35,6 +35,8 @@ namespace Gameplay
         public Vector3 PlayerVelocity { get; set; }
 
         public float GetPlayerSpeed() => m_PlayerSpeed;
+
+        public float GetSprintSpeed() => m_SprintSpeed;
         public float GetCrouchSpeed() => m_CrouchSpeed;
         public float GetJumpHeight() => m_JumpHeight;
         public float GetGravityValue() => m_GravityValue;
@@ -49,6 +51,7 @@ namespace Gameplay
         public Player_JumpingState Jumping { get; private set; }
         public Player_LandingState Landing { get; private set; }
         public Player_CrouchingState Crouching { get; private set; }
+        public Player_SprintingState Sprinting { get; private set; }
 
         private void Start()
         {
@@ -65,6 +68,9 @@ namespace Gameplay
             Jumping = new Player_JumpingState(this, m_MovementSM);
             Landing = new Player_LandingState(this, m_MovementSM);
             Crouching = new Player_CrouchingState(this, m_MovementSM);
+            Sprinting = new Player_SprintingState(this, m_MovementSM);
+
+            m_MovementSM.Initialize(Standing);
         }
 
         private void Update()

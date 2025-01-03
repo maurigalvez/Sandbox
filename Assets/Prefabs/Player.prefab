@@ -133,7 +133,7 @@ MonoBehaviour:
   m_RotationSpeed: 5
   m_CrouchColliderHeight: 1.35
   m_SpeedDampTime: 0.1
-  m_VelocityDampTime: 0.9
+  m_VelocityDampTime: 0.1
   m_RotationDampTime: 0.2
   m_AirControl: 0.5
 --- !u!1001 &3630339688748584780

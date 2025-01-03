@@ -23,7 +23,7 @@ namespace Gameplay.FSM
             if (m_TimePassed < LANDING_TIME) return;
             
             m_Character.Animator.SetTrigger(MOVE_ANIMTRIGGER_NAME);
-            m_StateMachine.ChangeState(m_Character.Landing);       
+            m_StateMachine.ChangeState(m_Character.Standing);       
         }
     }
 }
