@@ -53,6 +53,9 @@ namespace Gameplay.FSM
         {
             base.LogicUpdate();
             m_Character.Animator.SetFloat(SPEED_ANIM_NAME, m_Input.magnitude, m_Character.GetSpeedDampTime(), Time.deltaTime);
+            m_Character.Animator.SetFloat(XDIRECTION_ANIM_NAME, m_Input.x, m_Character.GetSpeedDampTime(), Time.deltaTime);
+            m_Character.Animator.SetFloat(YDIRECTION_ANIM_NAME, m_Input.y, m_Character.GetSpeedDampTime(), Time.deltaTime);
+
             if (m_Sprinting)
                 m_StateMachine.ChangeState(m_Character.Sprinting);
             if (m_Jump)
@@ -74,7 +77,17 @@ namespace Gameplay.FSM
             m_Character.Controller.Move(m_CurrentVelocity * Time.deltaTime * m_PlayerSpeed + m_GravityVelocity * Time.deltaTime);
 
             if (m_Velocity.sqrMagnitude > 0f)
-                m_Character.transform.rotation = Quaternion.Slerp(m_Character.transform.rotation, Quaternion.LookRotation(m_Velocity), m_Character.GetRotationDampTime());
+            {
+                RotateToCameraLook();
+            }
+        }
+
+        private void RotateToCameraLook()
+        {
+            var lookRotation = Quaternion.LookRotation(m_Character.CameraTransform.forward);
+            var newEuler = m_Character.transform.rotation.eulerAngles;
+            newEuler.y = lookRotation.eulerAngles.y;
+            m_Character.transform.rotation = Quaternion.Slerp(m_Character.transform.rotation, Quaternion.Euler(newEuler), m_Character.GetRotationDampTime());
         }
 
         public override void Exit()

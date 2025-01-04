@@ -22,6 +22,8 @@ namespace Gameplay.FSM
         protected const string LAND_ANIMTRIGGER_NAME = "Land";
         protected const string CROUCH_ANIMTRIGGER_NAME = "Crouch";
         protected const string SPRINTJUMP_ANIMTRIGGER_NAME = "SprintJump";
+        protected const string XDIRECTION_ANIM_NAME = "XDirection";
+        protected const string YDIRECTION_ANIM_NAME = "YDirection";
 
         public PlayerState(Player_Character _character, StateMachine _stateMachine)
         {

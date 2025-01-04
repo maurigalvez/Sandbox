@@ -42,6 +42,7 @@ namespace Gameplay.FSM
             base.HandleInput();
             if (m_CrouchAction.triggered && !m_BelowCeiling)
                 m_CrouchHeld = true;
+
             m_Input = m_MoveAction.ReadValue<Vector2>();
             m_Velocity = new Vector3(m_Input.x, 0, m_Input.y);
             m_Velocity = m_Velocity.x * m_Character.CameraTransform.right.normalized + m_Velocity.z * m_Character.CameraTransform.forward.normalized;
@@ -52,6 +53,8 @@ namespace Gameplay.FSM
         {
             base.LogicUpdate();
             m_Character.Animator.SetFloat(SPEED_ANIM_NAME, m_Input.magnitude,m_Character.GetSpeedDampTime(), Time.deltaTime);
+            m_Character.Animator.SetFloat(XDIRECTION_ANIM_NAME, m_Input.x, m_Character.GetSpeedDampTime(), Time.deltaTime);
+            m_Character.Animator.SetFloat(YDIRECTION_ANIM_NAME, m_Input.y, m_Character.GetSpeedDampTime(), Time.deltaTime);
 
             if (m_CrouchHeld)
                 m_StateMachine.ChangeState(m_Character.Standing);
@@ -70,7 +73,7 @@ namespace Gameplay.FSM
             m_Character.Controller.Move(m_CurrentVelocity * Time.deltaTime * m_PlayerSpeed + m_GravityVelocity * Time.deltaTime);
 
             if (m_Velocity.magnitude > 0)
-                m_Character.transform.rotation = Quaternion.Slerp(m_Character.transform.rotation, Quaternion.LookRotation(m_Velocity), m_Character.GetRotationDampTime());
+                RotateToCameraLook();
         }
 
         /// <summary>
@@ -91,6 +94,13 @@ namespace Gameplay.FSM
             }
             Debug.DrawRay(m_Character.transform.position, direction * m_Character.NormalColliderHeight, Color.yellow);
             return false;
+        }
+        private void RotateToCameraLook()
+        {
+            var lookRotation = Quaternion.LookRotation(m_Character.CameraTransform.forward);
+            var newEuler = m_Character.transform.rotation.eulerAngles;
+            newEuler.y = lookRotation.eulerAngles.y;
+            m_Character.transform.rotation = Quaternion.Slerp(m_Character.transform.rotation, Quaternion.Euler(newEuler), m_Character.GetRotationDampTime());
         }
     }
 }
