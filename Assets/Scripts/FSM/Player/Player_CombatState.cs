@@ -1,33 +1,28 @@
 using UnityEngine;
 namespace Gameplay.FSM
 {
-    public class Player_StandingState : PlayerState
+    public class Player_CombatState : PlayerState
     {
         float m_GravityValue;
-        bool m_Jump;
-        bool m_Crouch;
         Vector3 m_CurrentVelocity;
         bool m_Grounded;
-        bool m_Sprinting;
+        bool m_SheathWeapon;
         float m_PlayerSpeed;
-        bool m_DrawWeapon;
         Vector3 m_CVelocity;
 
-        public Player_StandingState(Player_Character _character, StateMachine _stateMachine): base(_character, _stateMachine) { }
+        public Player_CombatState(Player_Character _character, StateMachine _stateMachine): base(_character, _stateMachine) { }
 
         public override void Enter()
         {
             base.Enter();
 
-            m_Jump = false;
-            m_Crouch = false;
-            m_Sprinting = false;
-            m_DrawWeapon = false;
+            m_SheathWeapon = false;
             this.m_Input = Vector2.zero;
             this.m_Velocity = Vector3.zero;
             m_CurrentVelocity = Vector3.zero;
             m_GravityVelocity.y = 0;
 
+            this.m_Velocity = m_Character.PlayerVelocity;
             m_PlayerSpeed = m_Character.GetPlayerSpeed();
             m_Grounded = m_Character.Controller.isGrounded;
             m_GravityValue = m_Character.GetGravityValue();
@@ -37,13 +32,10 @@ namespace Gameplay.FSM
         {
             base.HandleInput();
 
-            if (m_JumpAction.triggered) m_Jump = true;
-
-            if (m_CrouchAction.triggered) m_Crouch = true;
-
-            if(m_SprintAction.triggered) m_Sprinting = true;
-
-            if(m_DrawWeaponAction.triggered) m_DrawWeapon = true;
+            if (m_DrawWeaponAction.triggered)
+            {
+                m_SheathWeapon = true;
+            }
 
             m_Input = m_MoveAction.ReadValue<Vector2>();
             m_Velocity = new Vector3(m_Input.x, 0, m_Input.y);
@@ -58,17 +50,11 @@ namespace Gameplay.FSM
             m_Character.Animator.SetFloat(SPEED_ANIM_NAME, m_Input.magnitude, m_Character.GetSpeedDampTime(), Time.deltaTime);
             m_Character.Animator.SetFloat(XDIRECTION_ANIM_NAME, m_Input.x, m_Character.GetSpeedDampTime(), Time.deltaTime);
             m_Character.Animator.SetFloat(YDIRECTION_ANIM_NAME, m_Input.y, m_Character.GetSpeedDampTime(), Time.deltaTime);
-
-            if (m_Sprinting)
-                m_StateMachine.ChangeState(m_Character.Sprinting);
-            if (m_Jump)
-                m_StateMachine.ChangeState(m_Character.Jumping);
-            if (m_Crouch)
-                m_StateMachine.ChangeState(m_Character.Crouching);
-            if (m_DrawWeapon)
+ 
+            if (m_SheathWeapon)
             {
-                m_StateMachine.ChangeState(m_Character.Combat);
-                m_Character.Animator.SetTrigger(DRAW_WEAPON_TRIGGER);
+                m_Character.Animator.SetTrigger(SHEATH_WEAPON_TRIGGER);
+                m_StateMachine.ChangeState(m_Character.Standing);
             }
         }
 

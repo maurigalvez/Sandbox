@@ -15,6 +15,8 @@ namespace Gameplay.FSM
         protected InputAction m_JumpAction;
         protected InputAction m_CrouchAction;
         protected InputAction m_SprintAction;
+        protected InputAction m_DrawWeaponAction;
+        protected InputAction m_AttackAction;
 
         protected const string SPEED_ANIM_NAME = "Speed";
         protected const string MOVE_ANIMTRIGGER_NAME = "Move";
@@ -24,6 +26,8 @@ namespace Gameplay.FSM
         protected const string SPRINTJUMP_ANIMTRIGGER_NAME = "SprintJump";
         protected const string XDIRECTION_ANIM_NAME = "XDirection";
         protected const string YDIRECTION_ANIM_NAME = "YDirection";
+        protected const string DRAW_WEAPON_TRIGGER = "DrawWeapon";
+        protected const string SHEATH_WEAPON_TRIGGER = "SheathWeapon";
 
         public PlayerState(Player_Character _character, StateMachine _stateMachine)
         {
@@ -34,6 +38,8 @@ namespace Gameplay.FSM
             m_JumpAction = m_Character.PlayerInput.actions["Jump"];
             m_CrouchAction = m_Character.PlayerInput.actions["Crouch"];
             m_SprintAction = m_Character.PlayerInput.actions["Sprint"];
+            m_DrawWeaponAction = m_Character.PlayerInput.actions["DrawWeapon"];
+            m_AttackAction = m_Character.PlayerInput.actions["Attack"];
         }
 
         public override void Enter()

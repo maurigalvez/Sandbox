@@ -134,7 +134,7 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5395644877654334040}
   m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 15a9813c844de7448b7e92d6f925983a, type: 3}
+  m_Avatar: {fileID: 9000000, guid: 6e1772da77ed0b74ca5bec889d4dcb2c, type: 3}
   m_Controller: {fileID: 9100000, guid: 993253b3a9e850345a5ff3ee8e99925f, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
@@ -215,7 +215,7 @@ Transform:
   m_GameObject: {fileID: 5810897946641661279}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.73999023, y: 1.57, z: -1.5499878}
+  m_LocalPosition: {x: 0.73999023, y: 1.59, z: -1.5499878}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -360,6 +360,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Model
       objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: 6e1772da77ed0b74ca5bec889d4dcb2c, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 993253b3a9e850345a5ff3ee8e99925f, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

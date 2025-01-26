@@ -1148,6 +1148,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -1.5499878
       objectReference: {fileID: 0}
+    - target: {fileID: 4947815670692766810, guid: 3df592ebd1fec8f4ba1a36f603fbfe1d, type: 3}
+      propertyPath: m_WarningMessage
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 5395644877654334040, guid: 3df592ebd1fec8f4ba1a36f603fbfe1d, type: 3}
       propertyPath: m_Name
       value: Player
@@ -1155,10 +1159,6 @@ PrefabInstance:
     - target: {fileID: 5395644877654334040, guid: 3df592ebd1fec8f4ba1a36f603fbfe1d, type: 3}
       propertyPath: m_IsActive
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5804213238951984117, guid: 3df592ebd1fec8f4ba1a36f603fbfe1d, type: 3}
-      propertyPath: ShoulderOffset.y
-      value: -0.85
       objectReference: {fileID: 0}
     - target: {fileID: 7875225194008985789, guid: 3df592ebd1fec8f4ba1a36f603fbfe1d, type: 3}
       propertyPath: m_Camera

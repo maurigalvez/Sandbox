@@ -4,7 +4,7 @@ namespace Gameplay.FSM
     public class Player_LandingState : PlayerState
     {
         float m_TimePassed;
-        const float LANDING_TIME = 0.5f;
+        const float LANDING_TIME = 0.35f;
 
         public Player_LandingState(Player_Character _character, StateMachine _stateMachine) : base(_character, _stateMachine) { }
 

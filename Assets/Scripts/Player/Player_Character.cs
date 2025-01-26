@@ -52,7 +52,7 @@ namespace Gameplay
         public Player_LandingState Landing { get; private set; }
         public Player_CrouchingState Crouching { get; private set; }
         public Player_SprintingState Sprinting { get; private set; }
-
+        public Player_CombatState Combat { get; private set; }
         private void Start()
         {
             Controller = GetComponent<CharacterController>();
@@ -69,6 +69,7 @@ namespace Gameplay
             Landing = new Player_LandingState(this, m_MovementSM);
             Crouching = new Player_CrouchingState(this, m_MovementSM);
             Sprinting = new Player_SprintingState(this, m_MovementSM);
+            Combat = new Player_CombatState(this, m_MovementSM);
 
             m_MovementSM.Initialize(Standing);
         }
