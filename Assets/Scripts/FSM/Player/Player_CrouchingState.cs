@@ -40,8 +40,7 @@ namespace Gameplay.FSM
         public override void HandleInput()
         {
             base.HandleInput();
-            if (m_CrouchAction.triggered && !m_BelowCeiling)
-                m_CrouchHeld = true;
+            m_CrouchHeld = !m_CrouchAction.triggered || !m_BelowCeiling;
 
             m_Input = m_MoveAction.ReadValue<Vector2>();
             m_Velocity = new Vector3(m_Input.x, 0, m_Input.y);
@@ -56,7 +55,7 @@ namespace Gameplay.FSM
             m_Character.Animator.SetFloat(XDIRECTION_ANIM_NAME, m_Input.x, m_Character.GetSpeedDampTime(), Time.deltaTime);
             m_Character.Animator.SetFloat(YDIRECTION_ANIM_NAME, m_Input.y, m_Character.GetSpeedDampTime(), Time.deltaTime);
 
-            if (m_CrouchHeld)
+            if (!m_CrouchHeld)
                 m_StateMachine.ChangeState(m_Character.Standing);
         }
 

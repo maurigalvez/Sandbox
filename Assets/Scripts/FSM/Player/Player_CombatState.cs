@@ -9,7 +9,7 @@ namespace Gameplay.FSM
         bool m_SheathWeapon;
         float m_PlayerSpeed;
         Vector3 m_CVelocity;
-
+        bool m_Attack;
         public Player_CombatState(Player_Character _character, StateMachine _stateMachine): base(_character, _stateMachine) { }
 
         public override void Enter()
@@ -17,6 +17,7 @@ namespace Gameplay.FSM
             base.Enter();
 
             m_SheathWeapon = false;
+            m_Attack = false;
             this.m_Input = Vector2.zero;
             this.m_Velocity = Vector3.zero;
             m_CurrentVelocity = Vector3.zero;
@@ -37,6 +38,9 @@ namespace Gameplay.FSM
                 m_SheathWeapon = true;
             }
 
+            if (m_AttackAction.triggered)
+                m_Attack = true;
+
             m_Input = m_MoveAction.ReadValue<Vector2>();
             m_Velocity = new Vector3(m_Input.x, 0, m_Input.y);
 
@@ -55,6 +59,11 @@ namespace Gameplay.FSM
             {
                 m_Character.Animator.SetTrigger(SHEATH_WEAPON_TRIGGER);
                 m_StateMachine.ChangeState(m_Character.Standing);
+            }
+            if(m_Attack)
+            {
+                m_Character.Animator.SetTrigger(ATTACK_TRIGGER);
+                m_StateMachine.ChangeState(m_Character.Attack);
             }
         }
 

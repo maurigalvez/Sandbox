@@ -11,6 +11,7 @@ namespace Gameplay.FSM
         bool m_Sprinting;
         float m_PlayerSpeed;
         bool m_DrawWeapon;
+        bool m_Attack;
         Vector3 m_CVelocity;
 
         public Player_StandingState(Player_Character _character, StateMachine _stateMachine): base(_character, _stateMachine) { }
@@ -23,6 +24,7 @@ namespace Gameplay.FSM
             m_Crouch = false;
             m_Sprinting = false;
             m_DrawWeapon = false;
+            m_Attack = false;
             this.m_Input = Vector2.zero;
             this.m_Velocity = Vector3.zero;
             m_CurrentVelocity = Vector3.zero;
@@ -45,6 +47,8 @@ namespace Gameplay.FSM
 
             if(m_DrawWeaponAction.triggered) m_DrawWeapon = true;
 
+            if (m_AttackAction.triggered) m_Attack = true;
+
             m_Input = m_MoveAction.ReadValue<Vector2>();
             m_Velocity = new Vector3(m_Input.x, 0, m_Input.y);
 
@@ -65,7 +69,7 @@ namespace Gameplay.FSM
                 m_StateMachine.ChangeState(m_Character.Jumping);
             if (m_Crouch)
                 m_StateMachine.ChangeState(m_Character.Crouching);
-            if (m_DrawWeapon)
+            if (m_DrawWeapon || m_Attack)
             {
                 m_StateMachine.ChangeState(m_Character.Combat);
                 m_Character.Animator.SetTrigger(DRAW_WEAPON_TRIGGER);

@@ -28,6 +28,7 @@ namespace Gameplay.FSM
         protected const string YDIRECTION_ANIM_NAME = "YDirection";
         protected const string DRAW_WEAPON_TRIGGER = "DrawWeapon";
         protected const string SHEATH_WEAPON_TRIGGER = "SheathWeapon";
+        protected const string ATTACK_TRIGGER = "Attack";
 
         public PlayerState(Player_Character _character, StateMachine _stateMachine)
         {
